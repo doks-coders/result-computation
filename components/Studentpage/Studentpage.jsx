@@ -3,6 +3,11 @@ import { Box, Flex, Stack, HStack, VStack, Text, Image, Button, Grid,Input, Sele
 import { Students } from "../../Datalayer/Students"
 import { getRandomString } from "../../constants"
 const Studentpage=()=>{
+    //Animations State
+    const [loading, setLoading] = useState(false)
+    const [showModal,setShowModal] = useState(false)
+    const [modalMessage,setModalMessage] = useState({mode:'',message:''})
+
     const [student_data,setStudentData] = useState({
         first_name:'',
         last_name:'',
@@ -37,13 +42,28 @@ const Studentpage=()=>{
     const saveStudent = async()=>{
         const data = {...guardian_data,...student_data}
         data['id'] = getRandomString(10)
+        setLoading(true)
         await new Students().saveOne(data)
-        alert('User Created')
+        setLoading(false)
+        setModalMessage({mode:'action',message:'Saved Student'})
     }
 
     
     return(
         <>
+        {
+          showModal?<Flex justifyContent={'center'} alignItems={"center"} zIndex={'4'}  position={'absolute'} h="100vh" w="100vw" >
+                {
+                    loading?<Spinner/>:<Flex borderRadius={'10px'} justifyContent={'center'} flexDir={'column'} alignItems={'center'} bg="green.500" color="white" boxSize={'300px'}>
+                    <Box p="10px" fontSize={'100px'} className="pi pi-check-circle"></Box>
+                    <Text fontWeight={'bold'}>{modalMessage.message}</Text>
+                    <Button onClick={()=>setShowModal(false)} size={'sm'} mt="15px" colorScheme="yellow">Cancel</Button>
+                    <Button size={'sm'} mt="10px" colorScheme="brown">Go to Home</Button>
+                </Flex>
+                }
+                
+            </Flex>:<></>
+        }
 
         <Flex flexDir={['column','row','row']}>
             <Stack flexBasis="50%">
