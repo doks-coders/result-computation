@@ -27,6 +27,11 @@ const RegisterSubject = ({userid})=>{
     const [session,setSession] = useState('')
     const [term,setTerm] = useState('')
 
+    //Animations
+    const [loading, setLoading] = useState(false)
+    const [showModal,setShowModal] = useState(false)
+    const [modalMessage,setModalMessage] = useState({mode:'',message:''})
+
     
     const registerSubjects = async()=>{
         const subjects_selected= indexes.map(val=>subjects[val])
@@ -57,12 +62,15 @@ const RegisterSubject = ({userid})=>{
                 user_id_string:`${userid}-${session}-${term}`
             })
         })
-        if(proceed){ 
+        if(proceed){
+            setShowModal(true)
+            setLoading(true) 
             for(const subject of subject_grade){
                 subject['id'] = subject.user_id_string+`-${subject.subject_name}`
                 await new Results().saveOne(subject)
             }
-            alert('Subjects Registered')
+            setLoading(false)
+            setModalMessage({mode:'action',message:'Registered Subjects'})
         }
         
         
@@ -80,6 +88,19 @@ const RegisterSubject = ({userid})=>{
     }
 return(
     <>
+    {
+          showModal?<Flex justifyContent={'center'} alignItems={"center"} zIndex={'4'}  position={'absolute'} h="100vh" w="100vw" >
+                {
+                    loading?<Spinner/>:<Flex borderRadius={'10px'} justifyContent={'center'} flexDir={'column'} alignItems={'center'} bg="green.500" color="white" boxSize={'300px'}>
+                    <Box p="10px" fontSize={'100px'} className="pi pi-check-circle"></Box>
+                    <Text fontWeight={'bold'}>{modalMessage.message}</Text>
+                    <Button onClick={()=>setShowModal(false)} size={'sm'} mt="15px" colorScheme="yellow">Cancel</Button>
+                    <Button size={'sm'} mt="10px" colorScheme="brown">Go to Home</Button>
+                </Flex>
+                }
+                
+            </Flex>:<></>
+        }
     <Stack>
         <HStack>
             <Select w="100%" onChange={(e)=>setTerm(e.currentTarget.value)} placeholder="Term">

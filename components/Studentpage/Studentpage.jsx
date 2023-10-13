@@ -42,6 +42,7 @@ const Studentpage=()=>{
     const saveStudent = async()=>{
         const data = {...guardian_data,...student_data}
         data['id'] = getRandomString(10)
+        setShowModal(true)
         setLoading(true)
         await new Students().saveOne(data)
         setLoading(false)
