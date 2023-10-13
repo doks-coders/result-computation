@@ -1,4 +1,5 @@
-import { Box,HStack,VStack,Stack,Flex,Select,Text,Checkbox, Grid,Input,Button,Table,Tbody,Tr,Td,Divider,Thead,Th } from "@chakra-ui/react"
+import { Spinner,Box,HStack,VStack,Stack,Flex,Select,Text,Checkbox, Grid,Input,Button,Table,Tbody,Tr,Td,Divider,Thead,Th } from "@chakra-ui/react"
+
 import { useEffect, useState } from "react"
 import { Results } from "../../Datalayer/Results"
 import { Students } from "../../Datalayer/Students"
@@ -12,6 +13,7 @@ const CreateResult=({userid})=>{
         home_work:10,
         exam:60,
     }
+    const [user,setUser] = useState({name:'',class_assigned:''})
     const [searched,setSearched] = useState(false)
     const [selected_term,setSelectedTerm] = useState('')
     const [selected_session,setSelectedSession] = useState('')
@@ -25,6 +27,24 @@ const CreateResult=({userid})=>{
         exam:''
     })
 
+    //Animations State
+    const [loading, setLoading] = useState(false)
+    const [showModal,setShowModal] = useState(false)
+    const [modalMessage,setModalMessage] = useState({mode:'',message:''})
+
+    useEffect(()=>{
+        const getUser = async ()=>{
+            const student = await new Students().getOne(userid)
+            const {first_name,last_name,class_assigned} = student
+            setUser({
+                name:`${last_name} ${first_name}`,
+                class_assigned
+            })
+
+        }
+        getUser()
+        
+    },[])
     //Search For Subjects
     const searchForSubjects=async()=>{
         const subjects = await new Results().findRecord({field:'user_id_string',
@@ -87,9 +107,10 @@ const CreateResult=({userid})=>{
            const index = copied.findIndex(val=>val.subject_name==selected_subject.subject_name)
            //Second layer
            
+           setShowModal(true)
            selected_subject['uploaded'] = true
+           setLoading(true)
            await new Results().updateRecord(selected_subject,selected_subject.user_id_string+`-${selected_subject.subject_name}`)
-           alert("Saved")
            copied[index] = selected_subject
            currentUserSubjects(copied) //Saved student subjects state
 
@@ -107,7 +128,9 @@ const CreateResult=({userid})=>{
            measured_scores = {...measured_scores, ...updated_score}
            //Updates Database on Firebase
            await new Students().updateRecord({measured_scores},userid)
-           alert("Saved Total Score")
+           setLoading(false)
+           setModalMessage({mode:'action',message:'Saved Result'})
+
 
 
         }
@@ -118,12 +141,34 @@ const CreateResult=({userid})=>{
 
 return(
     <>
+    {
+        showModal?<Flex justifyContent={'center'} alignItems={"center"} zIndex={'4'}  position={'absolute'} h="100vh" w="100vw" >
+        {
+            loading?<Spinner/>:<Flex borderRadius={'10px'} justifyContent={'center'} flexDir={'column'} alignItems={'center'} bg="green.500" color="white" boxSize={'300px'}>
+            <Box p="10px" fontSize={'100px'} className="pi pi-check-circle"></Box>
+            <Text fontWeight={'bold'}>{modalMessage.message}</Text>
+            <Button onClick={()=>setShowModal(false)} size={'sm'} mt="15px" colorScheme="yellow">Cancel</Button>
+            <Button size={'sm'} mt="10px" colorScheme="brown">Go to Home</Button>
+        </Flex>
+        }
+        
+    </Flex>:<></>
+    }
+
+
 <Stack px="10px" spacing={'20px'}>
-    <Box flexDir="column" spacing={'10px'}>
-        <Text><b>Name:</b> Daniel Odokuma</Text>
-        <Text><b>Class:</b> JSS1</Text>
-        <Text><b>School Number:</b> 1234242</Text>
-    </Box>
+    <HStack>
+        <Box p="3" color={'white'} bg={'blue.500'} className="pi pi-user" borderRadius={'10px'}>
+
+
+        </Box>
+        <Box flexDir="column" spacing={'10px'}>
+            <Text><b>Name:</b> {user.name}</Text>
+            <Text><b>Class:</b> {user.class_assigned}</Text>
+        </Box>
+
+    </HStack>
+    
     
     <HStack>
         <Stack w="100%">

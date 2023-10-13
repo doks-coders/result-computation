@@ -61,12 +61,12 @@ const ViewGrade=()=>{
                     <option value="2023-2024">2023-2024</option>
                 </Select>
                 <Select onChange={(e)=>setClass(e.currentTarget.value)} flexBasis={'50%'} placeholder="Class">
-                    <option value="JSS1">JSS1</option>
-                    <option value="JSS2">JSS2</option>
-                    <option value="JSS3">JSS3</option>
-                    <option value="SSS1">SSS1</option>
-                    <option value="SSS2">SSS2</option>
-                    <option value="SSS3">SSS3</option>
+                    <option value="Primary 1">Primary 1</option>
+                    <option value="Primary 2">Primary 2</option>
+                    <option value="Primary 3">Primary 3</option>
+                    <option value="Primary 4">Primary 4</option>
+                    <option value="Primary 5">Primary 5</option>
+                    <option value="Primary 6">Primary 6</option>
                 </Select>
 
                 <Select onChange={(e)=>setSelectedTerm(e.currentTarget.value)} flexBasis={'50%'} placeholder="Choose Term">

@@ -3,23 +3,24 @@ import { useState } from "react"
 import { Results } from "../../Datalayer/Results"
 const RegisterSubject = ({userid})=>{
     const subjects = [
-        "English Language",
         "Mathematics",
-        "Physics",
-        "Chemistry",
-        "Biology",
-        "Government",
-        "C.R.S",
+        "English",
+        "French",
+        "Home Economics",
+        "Social Studies",
+        "Agric science",
         "Civic Education",
-        "Literature",
-        "Marketing",
-        "Economics",
-        "Agriculture Science",
-        "Accounting",
-        "I.C.T",
-        "Further Maths",
-        "Geography",
-        "Technical Drawing"
+        "Phonics",
+        "Basic science",
+        "Bible Knowledge",
+        "Yorùbá",
+        "Creative Art",
+        "Quantitative Reasoning",
+        "Verbal Reasoning",
+        "Vocational Aptitude",
+        "Computer",
+        "Handwriting",
+        "Spelling"
     ]
 
     const [indexes,setIndexex] = useState([])
