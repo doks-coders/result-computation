@@ -1,0 +1,25 @@
+DEBUG:root:First log message
+INFO:googlemaps.client:API queries_quota: 60
+DEBUG:urllib3.util.retry:Converted retries value: 1 -> Retry(total=1, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.util.retry:Converted retries value: 1 -> Retry(total=1, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): maps.googleapis.com:443
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.20712277%2C-76.7855152&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.85867528%2C-77.3983454&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.85867528%2C-77.3983454&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.83791295%2C-77.10523477&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.83791295%2C-77.10523477&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.20712858%2C-76.78569236&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.20710908%2C-76.78573588&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.20710908%2C-76.78573588&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.86374997%2C-77.40746449&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.2070252%2C-76.78591256&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.92165197%2C-77.03765302&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.8784622%2C-76.98345993&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.20703245%2C-76.78591198&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.20707823%2C-76.78563019&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.96288674%2C-77.09804099&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.2071441%2C-76.78598523&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.83791295%2C-77.10523477&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=38.83791295%2C-77.10523477&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.20712858%2C-76.78569236&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://maps.googleapis.com:443 "GET /maps/api/geocode/json?latlng=39.20710908%2C-76.78573588&key=AIzaSyC6EuMd74MT24pDNF5bDEGKk-mXn8pTzck HTTP/1.1" 200 None
