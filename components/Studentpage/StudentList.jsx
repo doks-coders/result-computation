@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box,Stack,Table,Th, Tbody,Tr,Td,Thead, Input,HStack,Button,Flex } from "@chakra-ui/react";
+import { Box,Stack,Table,Th, Tbody,Tr,Td,Thead, Input,HStack,Button,Flex,Spinner } from "@chakra-ui/react";
 import Link from "next/link";
 import { Students } from "../../Datalayer/Students";
 const StudentList = ({mode})=>{

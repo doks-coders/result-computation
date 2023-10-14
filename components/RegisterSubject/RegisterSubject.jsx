@@ -1,6 +1,7 @@
-import { Box,HStack,VStack,Stack,Input,Select,Table,Thead,Tr,Th,Td,Tbody,Checkbox,Button,Flex } from "@chakra-ui/react"
+import { Box,HStack,VStack,Stack,Input,Text,Select,Table,Thead,Tr,Th,Td,Tbody,Checkbox,Button,Flex,Spinner } from "@chakra-ui/react"
 import { useState } from "react"
 import { Results } from "../../Datalayer/Results"
+import { AlertModal1 } from "../Misc/AlertModals"
 const RegisterSubject = ({userid})=>{
     const subjects = [
         "Mathematics",
@@ -91,12 +92,7 @@ return(
     {
           showModal?<Flex justifyContent={'center'} alignItems={"center"} zIndex={'4'}  position={'absolute'} h="100vh" w="100vw" >
                 {
-                    loading?<Spinner/>:<Flex borderRadius={'10px'} justifyContent={'center'} flexDir={'column'} alignItems={'center'} bg="green.500" color="white" boxSize={'300px'}>
-                    <Box p="10px" fontSize={'100px'} className="pi pi-check-circle"></Box>
-                    <Text fontWeight={'bold'}>{modalMessage.message}</Text>
-                    <Button onClick={()=>setShowModal(false)} size={'sm'} mt="15px" colorScheme="yellow">Cancel</Button>
-                    <Button size={'sm'} mt="10px" colorScheme="brown">Go to Home</Button>
-                </Flex>
+                    loading?<Spinner/>:<AlertModal1 setShowModal={setShowModal} modalMessage={modalMessage}/>
                 }
                 
             </Flex>:<></>
