@@ -189,7 +189,7 @@ return(
         <Button onClick={()=>searchForSubjects()} colorScheme="blue">Search</Button>
     </Flex>
 
-<Flex flexDir={['column','column','row']} display={searched?'flex':'none'}>
+<Flex flexDir={['column-reverse','column-reverse','row']} display={searched?'flex':'none'}>
     <Stack>
         <Text fontSize={'xl'}>Uploaded Results</Text>
         <Table>
