@@ -76,7 +76,7 @@ const StudentList = ({mode})=>{
                                 {val.class_assigned}
                             </Td>
                             <Td>
-                                {val.registration_no}
+                                {val.registration_no.toString().substring(0, 6)+'...'}
                             </Td>
                         </Tr>
                     </Link>
