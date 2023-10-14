@@ -1,7 +1,8 @@
 import { Box,HStack,VStack,Stack,Input,Text,Select,Table,Thead,Tr,Th,Td,Tbody,Checkbox,Button,Flex,Spinner } from "@chakra-ui/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Results } from "../../Datalayer/Results"
 import { AlertModal1 } from "../Misc/AlertModals"
+import { modalOverlayDesign } from "../../constants"
 const RegisterSubject = ({userid})=>{
     const subjects = [
         "Mathematics",
@@ -27,6 +28,7 @@ const RegisterSubject = ({userid})=>{
     const [indexes,setIndexex] = useState([])
     const [session,setSession] = useState('')
     const [term,setTerm] = useState('')
+    const [all_subjects_selected,setAllSubjectsSelected] = useState(false)
 
     //Animations
     const [loading, setLoading] = useState(false)
@@ -76,6 +78,15 @@ const RegisterSubject = ({userid})=>{
         
         
     }
+    const selectAll= ()=>{
+        const index=0
+        const all_indexes=[]
+        for (const subject of subjects){
+            all_indexes.push(index)
+            index++
+        }
+        setIndexex(all_indexes)
+    }
     const getIndexes=(index,value)=>{
         let set = [...indexes]
         if(value){
@@ -84,13 +95,28 @@ const RegisterSubject = ({userid})=>{
             set = set.filter((element) => element !== index);
         }
         setIndexex(set)
-
-
     }
+    const areAllIndexesSelected = ()=>{
+        let index=0
+        let matched=[]
+        for (const subject of subjects){
+            if(indexes.includes(index)){
+                matched.push(index)
+            }
+            index++
+        }
+        if(matched.length==subjects.length){
+            return true
+        }
+        return false
+    }
+    useEffect(()=>{
+        setAllSubjectsSelected(areAllIndexesSelected())
+    },[indexes])
 return(
     <>
     {
-          showModal?<Flex justifyContent={'center'} alignItems={"center"} zIndex={'4'}  position={'absolute'} h="100vh" w="100vw" >
+          showModal?<Flex {...modalOverlayDesign} >
                 {
                     loading?<Spinner/>:<AlertModal1 setShowModal={setShowModal} modalMessage={modalMessage}/>
                 }
@@ -121,6 +147,15 @@ return(
                 </Tr>
             </Thead>
             <Tbody>
+            <Tr>
+                            <Td>
+                               <Text>Select All</Text>
+                            </Td>
+                            <Td>
+                                <Checkbox isChecked={all_subjects_selected} onChange={(e)=>selectAll()} />
+                            </Td>
+                            
+                        </Tr>
                 {
                     subjects.map((val,index)=>(
                         <Tr>
@@ -128,7 +163,7 @@ return(
                                 {val}
                             </Td>
                             <Td>
-                                <Checkbox onChange={(e)=>getIndexes(index,e.currentTarget.checked)} placeholder={val}/>
+                                <Checkbox isChecked={indexes.includes(index)} onChange={(e)=>getIndexes(index,e.currentTarget.checked)} placeholder={val}/>
                             </Td>
                             
                         </Tr>

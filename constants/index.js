@@ -13,7 +13,16 @@ export const animatedButton = {
     bg:'black',
     color:'white'
 }
-
+export const modalOverlayDesign = {
+  justifyContent:'center', 
+  alignItems:"center", 
+  zIndex:'4',  
+  position:'fixed', 
+  top:0, 
+  left:0, 
+  right:0, 
+  bottom:0,
+}
 export const getRandomString=(length) =>{
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let result = '';

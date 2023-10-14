@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Box, Flex, Stack, HStack, VStack, Text, Image, Button, Grid,Input, Select,InputGroup,InputLeftElement,InputRightElement, Textarea,Spinner} from "@chakra-ui/react"
 import { Students } from "../../Datalayer/Students"
-import { getRandomString } from "../../constants"
+import { getRandomString,modalOverlayDesign } from "../../constants"
 import { AlertModal1 } from "../Misc/AlertModals"
 const Studentpage=()=>{
     //Animations State
@@ -51,10 +51,11 @@ const Studentpage=()=>{
     }
 
     
+    
     return(
         <>
         {
-          showModal?<Flex justifyContent={'center'} alignItems={"center"} zIndex={'4'}  position={'absolute'} h="100vh" w="100vw" >
+          showModal?<Flex  {...modalOverlayDesign}>
                 {
                     loading?<Spinner/>:<AlertModal1 setShowModal={setShowModal} modalMessage={modalMessage}/>
                 }

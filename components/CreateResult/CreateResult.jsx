@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Results } from "../../Datalayer/Results"
 import { Students } from "../../Datalayer/Students"
 import { AlertModal1 } from "../Misc/AlertModals"
+import { modalOverlayDesign } from "../../constants"
 
 const CreateResult=({userid})=>{
     const [results,setResults] = useState([])
@@ -143,7 +144,7 @@ const CreateResult=({userid})=>{
 return(
     <>
     {
-        showModal?<Flex justifyContent={'center'} alignItems={"center"} zIndex={'4'}  position={'absolute'} h="100vh" w="100vw" >
+        showModal?<Flex {...modalOverlayDesign}>
         {
             loading?<Spinner/>:<AlertModal1 setShowModal={setShowModal} modalMessage={modalMessage}/>
         }
