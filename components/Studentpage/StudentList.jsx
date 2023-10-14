@@ -61,7 +61,7 @@ const StudentList = ({mode})=>{
                 <Tr>
                     <Th>Name</Th>
                     <Th>Class</Th>
-                    <Th>School No</Th>
+                    <Th>Registration No</Th>
                 </Tr>
             </Thead>
             <Tbody>
@@ -76,7 +76,7 @@ const StudentList = ({mode})=>{
                                 {val.class_assigned}
                             </Td>
                             <Td>
-                                {val.id}
+                                {val.registration_no}
                             </Td>
                         </Tr>
                     </Link>
