@@ -149,7 +149,7 @@ return(
             <Tbody>
             <Tr>
                             <Td>
-                               <Text>Select All</Text>
+                               <Text fontSize={'x-small'} fontWeight={'bolD'}>SELECT ALL</Text>
                             </Td>
                             <Td>
                                 <Checkbox isChecked={all_subjects_selected} onChange={(e)=>selectAll()} />

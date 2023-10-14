@@ -3,6 +3,8 @@ import { Box, Flex, Stack, HStack, VStack, Text, Image, Button, Grid,Input, Sele
 import { Students } from "../../Datalayer/Students"
 import { getRandomString,modalOverlayDesign } from "../../constants"
 import { AlertModal1 } from "../Misc/AlertModals"
+import Chance from "chance"
+
 const Studentpage=()=>{
     //Animations State
     const [loading, setLoading] = useState(false)
@@ -50,6 +52,54 @@ const Studentpage=()=>{
         setModalMessage({mode:'action',message:'Saved Student'})
     }
 
+    const saveDifferentStudents = async()=>{
+        //Declare Number of Students in a Class
+        const studentNumbers={
+            'Primary 1':10,
+            'Primary 2':10,
+            'Primary 3':10,
+            'Primary 4':10,
+            'Primary 5':10,
+            'Primary 6':10,
+        }
+        setShowModal(true)
+        setLoading(true)
+        for (const class_selected of Object.keys(studentNumbers)){
+            const number_students =  studentNumbers[class_selected]
+            for(let i=0;i<number_students;i++){ //Iterate through number of students for each class
+                const chance = new Chance()
+                let address = chance.address()
+                let name = chance.name()
+                const [first_name,last_name] = name.split(' ')
+                const student_data={
+                    first_name,
+                    last_name,
+                    registration_no:chance.natural(),
+                    class_assigned:class_selected,
+                    gender:chance.gender(),
+                    nationality:'Nigerian',
+                    state_of_origin:chance.state(),
+                    local_government:'LGA',
+                    address,
+                }
+            
+                const guardian_data ={
+                    guardian_name:`Mr ${last_name}`,
+                    phone_number:chance.phone(),
+                    email_address:chance.email(),
+                    occupation:chance.company(),
+                    guardian_address:address
+                }
+                const data ={...student_data,...guardian_data}
+                data['id'] = getRandomString(10)
+                await new Students().saveOne(data)
+            }
+        }
+        setLoading(false)
+        setModalMessage({mode:'action',message:'Saved Student'})
+
+    }
+
     
     
     return(
@@ -66,6 +116,7 @@ const Studentpage=()=>{
         <Flex flexDir={['column','row','row']}>
             <Stack flexBasis="50%">
                 <Text px="3" textAlign={'center'}>PUPIL PERSONAL DATA</Text>
+                <Button display={'none'} onClick={saveDifferentStudents}>Upload Demo Students</Button>
                 <Box px="3">
                     <Text mb="1" fontSize={'xs'} fontWeight={'bold'}>FIRST NAME</Text>
                     <Input onChange={(e)=>setStudentInputData('first_name',e.currentTarget.value)}  />
