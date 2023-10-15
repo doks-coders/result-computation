@@ -1,8 +1,11 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Box, Flex, Stack, HStack, VStack, Text, Image, Button,Divider, Grid,Input,InputGroup,InputLeftElement,InputRightElement} from "@chakra-ui/react"
 import Link from "next/link"
 import { SectionsClicked } from "./HomepageElements"
 const AdminMenu = () => {
+    useEffect(()=>{
+        localStorage.setItem('type','admin')
+    },[])
     return (
      <>
          <Stack  justifyContent={'center'}>

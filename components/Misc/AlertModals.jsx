@@ -7,7 +7,7 @@ export const AlertModal1 = ({setShowModal,modalMessage,route,routeText})=>{
         <Box p="10px" fontSize={'100px'} className="pi pi-check-circle"></Box>
         <Text fontWeight={'bold'}>{modalMessage.message}</Text>
         <Button onClick={()=>setShowModal(false)} size={'sm'} mt="15px" colorScheme="yellow">Cancel</Button>
-        <Link href={route?route:'/'}>
+        <Link href={route?route:'/?type=admin'}>
             <Button size={'sm'} mt="10px" colorScheme="brown">{routeText?routeText:'Go to Home'}</Button>
         </Link>
     </Flex>
