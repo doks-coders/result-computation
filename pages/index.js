@@ -1,6 +1,6 @@
 import Homepage from "../components/Homepage/Homepage"
 import Head from "next/head"
-const landingpage = ()=>{
+const landingpage = ({type})=>{
 
     
     return (
@@ -23,9 +23,24 @@ const landingpage = ()=>{
     
    </Head>
 
-        <Homepage/>
+        <Homepage type={type}/>
         </>
     )
+}
+
+export async function getServerSideProps({ query }) {
+  const {type} = query;
+  let typeSelected
+  if(!type){
+    typeSelected =''
+  }else{
+    typeSelected=type
+  }
+  return {
+    props: {
+     type:typeSelected
+    },
+  };
 }
 
 export default landingpage

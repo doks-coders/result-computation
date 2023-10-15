@@ -23,6 +23,13 @@ export const modalOverlayDesign = {
   right:0, 
   bottom:0,
 }
+export const iconDivStyle = {
+  color:'white',
+  bg:'blue.500',
+  borderRadius:'10px',
+  fontSize:'50px',
+  p:"4",
+}
 export const getRandomString=(length) =>{
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let result = '';

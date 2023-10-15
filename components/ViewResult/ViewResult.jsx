@@ -2,67 +2,6 @@ import { useEffect, useState } from "react"
 import { Box,HStack,VStack,Table,Th,Tr,Td,Thead,Tbody } from "@chakra-ui/react"
 import { Results } from "../../Datalayer/Results"
 const ViewResult=({userid,selected_class,session,selected_term})=>{
-    const [results,setResults] = useState([{
-        subject_name:'Chemistry',
-        uploaded:true,
-        test_score:'4/5',
-        class_work:'10/20',
-        home_work:'4/4',
-        exam:'50/100',
-        term:'Second Term',
-        session:'2022-2023',
-        user_id:'345t46',
-        user_id_string:'345t46-2022-2023-Second Term'
-    },
-    {
-        subject_name:'Physics',
-        uploaded:false,
-        test_score:'6/40',
-        class_work:'3/10',
-        home_work:'5/6',
-        exam:'80/100',
-        term:'Second Term',
-        session:'2022-2023',
-        user_id:'2121332',
-        user_id_string:'2121332-2022-2023-Second Term'
-    },
-    {
-        subject_name:'Mathematics',
-        uploaded:false,
-        test_score:'2/3',
-        class_work:'5/6',
-        home_work:'40/80',
-        exam:'40/100',
-        term:'Second Term',
-        session:'2022-2023',
-        user_id:'34466796',
-        user_id_string:'34466796-2022-2023-Second Term'
-    },
-    {
-        subject_name:'English',
-        uploaded:false,
-        test_score:'2/4',
-        class_work:'6/6',
-        home_work:'8/10',
-        exam:'9/10',
-        term:'Second Term',
-        session:'2022-2023',
-        user_id:'34466796',
-        user_id_string:'34466796-2022-2023-Second Term'
-    },
-    {
-        subject_name:'Literature',
-        uploaded:false,
-        test_score:'5/6',
-        class_work:'4/5',
-        home_work:'6/7',
-        exam:'10/12',
-        term:'First Term',
-        session:'2022-2023',
-        user_id:'34466796',
-        user_id_string:'34466796-2022-2023-First Term'
-    }
-    ])
 
     const [results_formatted, setResultsFormatted] = useState([])
 

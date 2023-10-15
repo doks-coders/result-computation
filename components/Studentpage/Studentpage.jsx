@@ -5,7 +5,7 @@ import { getRandomString,modalOverlayDesign } from "../../constants"
 import { AlertModal1 } from "../Misc/AlertModals"
 import Chance from "chance"
 
-const Studentpage=()=>{
+const Studentpage=({userid})=>{
     //Animations State
     const [loading, setLoading] = useState(false)
     const [showModal,setShowModal] = useState(false)
@@ -43,11 +43,19 @@ const Studentpage=()=>{
         setGuardianData(copied)
     }
     const saveStudent = async()=>{
-        const data = {...guardian_data,...student_data}
-        data['id'] = getRandomString(10)
+        const data = {...guardian_data,...student_data,profile_completed:true}
         setShowModal(true)
         setLoading(true)
+        
+
+        if(userid!=''){
+            data['id'] = userid
+        }else{
+            data['id'] = getRandomString(10)
+        }
         await new Students().saveOne(data)
+
+
         setLoading(false)
         setModalMessage({mode:'action',message:'Saved Student'})
     }
@@ -91,8 +99,17 @@ const Studentpage=()=>{
                     guardian_address:address
                 }
                 const data ={...student_data,...guardian_data}
-                data['id'] = getRandomString(10)
+                if(userid!=''){
+                    data['id'] = userid
+                }else{
+                    data['id'] = getRandomString(10)
+                }
+                
                 await new Students().saveOne(data)
+
+                if(userid!=''){
+                    Router.push('/?type=student')
+                }
             }
         }
         setLoading(false)
@@ -107,7 +124,7 @@ const Studentpage=()=>{
         {
           showModal?<Flex  {...modalOverlayDesign}>
                 {
-                    loading?<Spinner/>:<AlertModal1 setShowModal={setShowModal} modalMessage={modalMessage}/>
+                    loading?<Spinner/>:<AlertModal1 route={`/?type=student`} setShowModal={setShowModal} modalMessage={modalMessage}/>
                 }
                 
             </Flex>:<></>

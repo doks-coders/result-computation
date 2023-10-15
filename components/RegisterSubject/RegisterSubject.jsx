@@ -8,12 +8,13 @@ const RegisterSubject = ({userid})=>{
         "Mathematics",
         "English",
         "French",
-        "Home Economics",
         "Social Studies",
+        "Basic science",
+        /*
+        "Home Economics",
         "Agric science",
         "Civic Education",
         "Phonics",
-        "Basic science",
         "Bible Knowledge",
         "Yorùbá",
         "Creative Art",
@@ -23,6 +24,7 @@ const RegisterSubject = ({userid})=>{
         "Computer",
         "Handwriting",
         "Spelling"
+        */
     ]
 
     const [indexes,setIndexex] = useState([])
@@ -118,12 +120,12 @@ return(
     {
           showModal?<Flex {...modalOverlayDesign} >
                 {
-                    loading?<Spinner/>:<AlertModal1 setShowModal={setShowModal} modalMessage={modalMessage}/>
+                    loading?<Spinner/>:<AlertModal1 route={(userid!='')?'/?type=student':'/'} setShowModal={setShowModal} modalMessage={modalMessage}/>
                 }
                 
             </Flex>:<></>
         }
-    <Stack>
+    <Stack p={4}>
         <HStack>
             <Select w="100%" onChange={(e)=>setTerm(e.currentTarget.value)} placeholder="Term">
                 <option value="First Term">First Term</option>

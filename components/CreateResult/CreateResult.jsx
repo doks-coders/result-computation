@@ -3,11 +3,16 @@ import { Spinner,Box,HStack,VStack,Stack,Flex,Select,Text,Checkbox, Grid,Input,B
 import { useEffect, useState } from "react"
 import { Results } from "../../Datalayer/Results"
 import { Students } from "../../Datalayer/Students"
+import { Teachers } from "../../Datalayer/Teachers" 
 import { AlertModal1 } from "../Misc/AlertModals"
 import { modalOverlayDesign } from "../../constants"
 
+
 const CreateResult=({userid})=>{
     const [results,setResults] = useState([])
+    const [type,setType] = useState('')
+    const [subject_assigned,setSubjectAssigned] = useState('')//Teacher Mode
+
 
     const percentages = {
         test_score:20,
@@ -36,12 +41,22 @@ const CreateResult=({userid})=>{
 
     useEffect(()=>{
         const getUser = async ()=>{
+            const typ = localStorage.getItem('type')
             const student = await new Students().getOne(userid)
+
+            if(typ=='teacher'){
+                const id = localStorage.getItem('userid')
+                const teacher = await new Teachers().getOne(id)
+                setSubjectAssigned(teacher['subject_assigned'])
+            }
             const {first_name,last_name,class_assigned} = student
+            
+
             setUser({
                 name:`${last_name} ${first_name}`,
                 class_assigned
             })
+            setType(typ)
 
         }
         getUser()
@@ -146,7 +161,7 @@ return(
     {
         showModal?<Flex {...modalOverlayDesign}>
         {
-            loading?<Spinner/>:<AlertModal1 setShowModal={setShowModal} modalMessage={modalMessage}/>
+            loading?<Spinner/>:<AlertModal1 route={(type=='teacher')?'/?type=teacher':'/'} setShowModal={setShowModal} modalMessage={modalMessage}/>
         }
         
     </Flex>:<></>
@@ -200,17 +215,36 @@ return(
                 </Tr>
             </Thead>
                 {
-                     current_subjects.map(val=>(
-                        <Tr onClick={()=>selectSubject(val.subject_name)} _hover={{transition:'.2s ease',backgroundColor:'gray.200'}} cursor={'pointer'}>
-                            <Td>
-                                <Text>{val.subject_name}</Text>
-                            </Td>
-                            <Td>
-                                <Checkbox isChecked={val.uploaded} /> 
-                            </Td>
-                        </Tr>
-                    ))
+                    (type=='admin')?<>
+                    {
+                        current_subjects.map(val=>(
+                            <Tr onClick={()=>selectSubject(val.subject_name)} _hover={{transition:'.2s ease',backgroundColor:'gray.200'}} cursor={'pointer'}>
+                                <Td>
+                                    <Text>{val.subject_name}</Text>
+                                </Td>
+                                <Td>
+                                    <Checkbox isChecked={val.uploaded} /> 
+                                </Td>
+                            </Tr>
+                        ))
+                    }    
+                    </>:<>
+                    {
+                        current_subjects.filter(val=>val.subject_name==subject_assigned).map(val=>(
+                            <Tr onClick={()=>selectSubject(val.subject_name)} _hover={{transition:'.2s ease',backgroundColor:'gray.200'}} cursor={'pointer'}>
+                                <Td>
+                                    <Text>{val.subject_name}</Text>
+                                </Td>
+                                <Td>
+                                    <Checkbox isChecked={val.uploaded} /> 
+                                </Td>
+                            </Tr>
+                        ))
+                    }
+                    </>    
+                    
                 }
+                
         </Table>
     </Stack>   
 

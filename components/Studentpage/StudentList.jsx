@@ -10,10 +10,11 @@ const StudentList = ({mode})=>{
 
     useEffect(()=>{
         const retrieveAllStudents = async()=>{
+            setLoading(true)
             const allStudents = await new Students().getAll()
-            console.log(allStudents)
             setItems(allStudents)
             setIncomingItems(allStudents)
+            setLoading(false)
         }
         retrieveAllStudents()
         
@@ -21,6 +22,7 @@ const StudentList = ({mode})=>{
     let [incomingItems,setIncomingItems] = useState([])
   
     let [items,setItems] = useState([])
+    let [loading,setLoading] = useState(false)
     let [searchText,setSearch] = useState('')
     useEffect(()=>{
         setItems(incomingItems)
@@ -66,6 +68,8 @@ const StudentList = ({mode})=>{
             </Thead>
             <Tbody>
                 {
+                   loading? <>
+                     {
                     items.map(val=>(
                     <Link href={mode_routes[mode]+`?userid=${val.id}`}>
                         <Tr _hover={{backgroundColor:'gray.100',transition:'.2s ease'}} cursor={'pointer'} p="2">
@@ -82,7 +86,15 @@ const StudentList = ({mode})=>{
                     </Link>
                     
                     ))
-                }      
+                }  
+                    </>:
+                    <Flex justifyContent={'center'}>
+                        <Spinner/>
+                    </Flex>
+                }
+                <>
+                </>
+                   
             </Tbody>
         </Table>
         </>

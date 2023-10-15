@@ -7,7 +7,7 @@ import { collection,setDoc, getDocs, addDoc, updateDoc, deleteDoc, doc,getDoc, o
 import { popKey } from "../../Business/MiscFunctions/OperationFunctions";
 import { BASE_PARENT } from "./base_parent";
 
-const app = initializeApp(new FirebaseCredentials().config)
+export const app = initializeApp(new FirebaseCredentials().config)
 const db = initializeFirestore(app,
 {
     localCache: persistentLocalCache({})

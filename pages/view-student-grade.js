@@ -1,8 +1,6 @@
-import Studentpage from "../components/Studentpage/Studentpage"
+import StudentViewResult from "../components/ViewResult/StudentViewResult";
 import Head from "next/head"
-const student = ({userid})=>{
-
-    
+const landingpage = ({userid})=>{
     return (
         <>
          <Head>
@@ -10,37 +8,30 @@ const student = ({userid})=>{
     name="viewport"
     content="width=device-width,initial-scale=1"
     />
-
     <meta
     name="description"
+    content={`Harness the Web: DOKS Script Pro, Your Web Automation and Data Extraction Companion!`}
     />
       <meta
     charSet='utf-8'
     />
     <link rel="icon" href='./favicon.ico' />
-    <title>{'Create Student'}</title>
+    <title>{'View Grade'}</title>
     
    </Head>
 
-        <Studentpage userid={userid}/>
+        <StudentViewResult/>
         </>
     )
 }
-
 export async function getServerSideProps({ query }) {
-  let id;
-  if(query['userid']){
-    id = query['userid']
-  }else{
-    id=""
-  }
+  const { userid } = query;
 
   return {
     props: {
-      userid:id
+      userid
     },
   };
 }
 
-export default student
-
+export default landingpage
