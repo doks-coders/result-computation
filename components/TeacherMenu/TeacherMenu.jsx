@@ -9,7 +9,6 @@ const TeacherMenu  = ()=>{
         
         const downloadStudents = async()=>{
             const id = localStorage.getItem('userid')
-            setUserId(id)
             const user = await new Teachers().getOne(id)
             if(user){
                 const {first_name,last_name} = user

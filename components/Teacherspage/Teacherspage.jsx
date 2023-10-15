@@ -24,10 +24,10 @@ const Teacherspage = ({userid})=>{
     const subjects = [
         "Mathematics",
         "English",
-        "French",
         "Social Studies",
         "Basic science",
         /*
+        "French",
         "Home Economics",
         "Agric science",
         "Civic Education",

@@ -68,7 +68,7 @@ const StudentList = ({mode})=>{
             </Thead>
             <Tbody>
                 {
-                   loading? <>
+                   (!loading)? <>
                      {
                     items.map(val=>(
                     <Link href={mode_routes[mode]+`?userid=${val.id}`}>
@@ -88,7 +88,7 @@ const StudentList = ({mode})=>{
                     ))
                 }  
                     </>:
-                    <Flex justifyContent={'center'}>
+                    <Flex w="100vw" justifyContent={'center'}>
                         <Spinner/>
                     </Flex>
                 }
