@@ -9,13 +9,13 @@ const RegisterSubject = ({userid})=>{
         "English",
         "Social Studies",
         "Basic science",
-        /*
         "French",
         "Home Economics",
         "Agric science",
         "Civic Education",
         "Phonics",
         "Bible Knowledge",
+        /*
         "Yorùbá",
         "Creative Art",
         "Quantitative Reasoning",
@@ -25,6 +25,7 @@ const RegisterSubject = ({userid})=>{
         "Handwriting",
         "Spelling"
         */
+        
     ]
 
     const [indexes,setIndexex] = useState([])
