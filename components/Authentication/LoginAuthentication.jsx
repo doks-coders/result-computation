@@ -95,7 +95,7 @@ const LoginAuthentication = ()=>{
                     <Text>Are you a teacher?</Text>
                 </HStack>
                 <Flex justifyContent={'center'}>
-                    <Button onClick={Login}> Login 
+                    <Button colorScheme="blue" onClick={Login}> Login 
                     {
                         loading? <Spinner ml="2" size={'sm'}/>:<></>
                     }

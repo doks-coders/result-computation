@@ -77,7 +77,7 @@ const SignUpAuthentication = ({type})=>{
                 </Box>
             
                 <Flex justifyContent={'center'}>
-                    <Button onClick={signUpUser}> Sign Up
+                    <Button colorScheme="blue" onClick={signUpUser}> Sign Up
 
                     {
                         loading? <Spinner ml="2" size={'sm'}/>:<></>
