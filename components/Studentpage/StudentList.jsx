@@ -20,7 +20,6 @@ const StudentList = ({mode})=>{
         
     },[])
     let [incomingItems,setIncomingItems] = useState([])
-  
     let [items,setItems] = useState([])
     let [loading,setLoading] = useState(false)
     let [searchText,setSearch] = useState('')

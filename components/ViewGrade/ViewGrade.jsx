@@ -1,4 +1,4 @@
-import {Select, Flex,HStack,VStack,Stack,Input,Button,Box,Text,Table,Thead,Tr,Th,Td,Tbody } from "@chakra-ui/react"
+import {Select, Flex,HStack,VStack,Stack,Input,Button,Box,Text,Table,Thead,Tr,Th,Td,Tbody, Spinner } from "@chakra-ui/react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { Students } from "../../Datalayer/Students"
@@ -7,10 +7,12 @@ const ViewGrade=()=>{
     const [session,setSession] = useState('')
     const [selected_class,setClass] = useState('')
     const [selected_term,setSelectedTerm] = useState('')
+    const [loading,setLoading] = useState(false)
     const [rankedStudents,setRankedStudents] = useState([
        
     ])
     const setRankedStudentsOperation = async()=>{
+        setLoading(true)
         let students_in_class = await new Students().findRecord({field:'class_assigned',
                                                                 value:selected_class,
                                                                 comparator:'==', 
@@ -40,8 +42,10 @@ const ViewGrade=()=>{
                 return numB-numA;
               });
             setRankedStudents(students_in_class)
+            setLoading(false)
            }else{
             alert('No Student Matches this Criteria')
+            setLoading(false)
            }
            
        }else{
@@ -93,6 +97,8 @@ const ViewGrade=()=>{
             </Thead>
             <Tbody>
                 {
+                   (!loading)?<>
+                    {
                     rankedStudents.map((val,index)=>(
                         <Link href={`view-result?userid=${val.id}&session=${session}&selected_class=${selected_class}&selected_term=${selected_term}`}>
                             <Tr cursor={'pointer'} _hover={{bg:'gray.100',transition:'.2s ease'}}>
@@ -104,6 +110,10 @@ const ViewGrade=()=>{
                         </Link>
                     ))
                 }
+                </>:<Flex justifyContent={'center'} w="100vw"><Spinner/></Flex>
+                
+                }
+                
                 
             </Tbody>
         </Table>
