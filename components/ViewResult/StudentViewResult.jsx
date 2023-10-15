@@ -32,14 +32,17 @@ const StudentViewResult=()=>{
         let proceed = true
         if(session==''){
             proceed=false
-            alert('Inpu Your Session')
+            alert('Input Your Session')
         }
         if(selected_term==''){
             proceed=false
             alert('Input Your Session')
         }
         if(proceed){
-            setShowStudentResult(true)
+            setShowStudentResult(false)
+            setTimeout(()=>{
+                setShowStudentResult(true)
+            },1000)
         }
         
     }

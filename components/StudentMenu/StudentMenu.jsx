@@ -31,7 +31,7 @@ const StudentMenu  = ()=>{
         <Grid templateColumns={["repeat(1, 1fr)","repeat(1, 1fr)","repeat(2, 1fr)"]} gap="2" >              
             <SectionsClicked
                         title={'Register Subjects'}
-                        text = {'Register Your Subjects For thee term'}
+                        text = {'Register Your Subjects For the term'}
                         btnText = {'Register'}
                         link={`register-subject?userid=${userid}`}
                         icon={'pi pi-book'}
