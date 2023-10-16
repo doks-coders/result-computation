@@ -153,6 +153,7 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
             </Table>
             {
                 (student_details.first_name!='')?
+                <>
                 <Grid fontSize={['14px','14px','md','md']} templateColumns={["repeat(1, 1fr)","repeat(2, 1fr)","repeat(2, 1fr)"]} mt={'50px'} maxW="500px"  borderWidth={'0.5px'}>
                     <HStack p="3">
                         <Text>
@@ -160,14 +161,6 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
                         </Text>
                         <Text>
                             {student_details.first_name} {student_details.last_name}
-                        </Text>
-                    </HStack>
-                    <HStack p="3">
-                        <Text>
-                            Class:
-                        </Text>
-                        <Text>
-                            {student_details.class_assigned} 
                         </Text>
                     </HStack>
                     <HStack p="3">
@@ -202,9 +195,7 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
                             {selected_term} 
                         </Text>
                     </HStack>
-            </Grid>:<></>
-
-            }
+            </Grid>
             <VStack mt="10px" alignItems={'center'} maxW={'500px'}>
             <Stack w="80%">
                <Text fontWeight={'bold'}>Teachers Remarks</Text> 
@@ -222,6 +213,11 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
             <Button mt="10px" colorScheme="blue" onClick={toggleEdit} >{edit?'Save':'Edit'} Teachers Remark</Button>
             </HStack>
             </VStack>
+            </>
+            :<></>
+
+            }
+            
             
         </Box>
         </>
