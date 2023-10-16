@@ -29,13 +29,17 @@ const StudentMenu  = ()=>{
                 
         </VStack>
         <Grid templateColumns={["repeat(1, 1fr)","repeat(1, 1fr)","repeat(2, 1fr)"]} gap="2" >              
+            {
+            /*    
             <SectionsClicked
-                        title={'Register Subjects'}
-                        text = {'Register Your Subjects For the term'}
-                        btnText = {'Register'}
-                        link={`register-subject?userid=${userid}`}
-                        icon={'pi pi-book'}
-                    />
+                title={'Register Subjects'}
+                text = {'Register Your Subjects For the term'}
+                btnText = {'Register'}
+                link={`register-subject?userid=${userid}`}
+                icon={'pi pi-book'}
+            />
+            */
+            }
             <SectionsClicked
                         title={'View Grade'}
                         text = {'View Your Grade'}
