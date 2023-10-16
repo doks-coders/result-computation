@@ -59,7 +59,7 @@ const SignUpAuthentication = ({type})=>{
         <Flex  justifyContent={'center'} h="100vh" alignItems={'center'}>
             <Stack>
                 <Stack alignItems={'center'}>
-                    <Text fontWeight={'bold'}>{type=='teacher'?type.toUpperCase():'PARENT'}</Text>
+                    <Text fontWeight={'bold'}>{type.toUpperCase()}</Text>
                     <Text fontSize={'xl'}> Sign Up</Text>
                     <Box className="pi pi-user" bg="blue.500" color="white" fontSize={'50px'} p="5" borderRadius={'full'}/>
                 </Stack>

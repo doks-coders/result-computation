@@ -11,7 +11,8 @@ const StudentList = ({mode})=>{
     useEffect(()=>{
         const retrieveAllStudents = async()=>{
             setLoading(true)
-            const allStudents = await new Students().getAll()
+            let allStudents = await new Students().getAll()
+            allStudents = allStudents.filter(val=>val.registration_no)
             setItems(allStudents)
             setIncomingItems(allStudents)
             setLoading(false)

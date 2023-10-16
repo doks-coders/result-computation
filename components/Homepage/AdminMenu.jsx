@@ -23,7 +23,7 @@ const AdminMenu = () => {
                     title={'Create Student'}
                     text = {'Create a Student Profile to upload results to'}
                     btnText = {'Create'}
-                    link={'student'}
+                    link={'sign-up?type=student'}
                     icon={'pi pi-user'}
                 />
                 <SectionsClicked
