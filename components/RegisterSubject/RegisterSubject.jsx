@@ -139,7 +139,7 @@ return(
     {
           showModal?<Flex {...modalOverlayDesign} >
                 {
-                    loading?<Spinner/>:<AlertModal1 route={(userid!='')?'/?type=student':'/'} setShowModal={setShowModal} modalMessage={modalMessage}/>
+                    loading?<Spinner/>:<AlertModal1 route={'/?type=admin'} setShowModal={setShowModal} modalMessage={modalMessage}/>
                 }
                 
             </Flex>:<></>
