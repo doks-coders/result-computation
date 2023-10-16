@@ -11,6 +11,10 @@ const ViewGrade=()=>{
     const [rankedStudents,setRankedStudents] = useState([
        
     ])
+
+
+    
+
     const setRankedStudentsOperation = async()=>{
         setLoading(true)
         let students_in_class = await new Students().findRecord({field:'class_assigned',
@@ -36,11 +40,7 @@ const ViewGrade=()=>{
            students_in_class = students_in_class.filter(val=>val!=undefined)
            if(students_in_class.length){
 
-            students_in_class.sort((a, b) => {
-                const numA = parseInt(a.last_measured_score);
-                const numB = parseInt(b.last_measured_score);
-                return numB-numA;
-              });
+            students_in_class
             setRankedStudents(students_in_class)
             setLoading(false)
            }else{
@@ -122,3 +122,40 @@ const ViewGrade=()=>{
     }
     
     export default ViewGrade
+
+
+    export const getAllStudentsRanked = async({selected_class,session,selected_term})=>{
+        let students_in_class = await new Students().findRecord({field:'class_assigned',
+                                                                value:selected_class,
+                                                                comparator:'==', 
+                                                                query_type:'SimpleQuery'})
+       //Checks if measured_scores are a key in the students                                                        
+       students_in_class = students_in_class.filter(val=>val['measured_scores'])
+       if(students_in_class.length){
+        students_in_class = students_in_class.map(val=>{
+            if(val['measured_scores']){
+                let measured_scores = val['measured_scores']
+                if(measured_scores[session+'-'+selected_term]){
+                    val['last_measured_score'] = measured_scores[session+'-'+selected_term].score
+                    return({...val})
+                }else{
+                    return undefined
+                }                
+            }
+            return undefined
+           })
+           //Clean null values
+           students_in_class = students_in_class.filter(val=>val!=undefined)
+           if(students_in_class.length){
+
+            students_in_class.sort((a, b) => {
+                const numA = parseInt(a.last_measured_score);
+                const numB = parseInt(b.last_measured_score);
+                return numB-numA;
+              });
+              return students_in_class
+        }
+        return []
+       }
+       return []
+    }

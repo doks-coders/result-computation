@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react"
-import { Box,HStack,VStack,Table,Th,Tr,Td,Thead,Tbody } from "@chakra-ui/react"
+import { Box,HStack,VStack,Table,Th,Tr,Td,Thead,Tbody,Grid,Text, Textarea, Button,Stack,Flex } from "@chakra-ui/react"
 import { Results } from "../../Datalayer/Results"
 import { Students } from "../../Datalayer/Students"
+import { getAllStudentsRanked } from "../ViewGrade/ViewGrade"
+
 const ViewResult=({userid,selected_class,session,selected_term})=>{
 
     const [results_formatted, setResultsFormatted] = useState([])
     const [student_details,setStudentDetails] = useState({
         first_name:'',
         last_name:'',
-        class_assigned:''
+        class_assigned:'',
+        gender:'',
+        position:0
     })
     const percentages = {
         test_score:20,
@@ -16,13 +20,19 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
         home_work:10,
         exam:60,
     }
+    const [teacher_remarks, setTeachersRemarks] = useState('He is a good boy')
+    const [edit,setEdit] = useState(false)
+    const toggleEdit=()=>{
+                setEdit(!edit)
+    }
 
     useEffect(()=>{
         const setGrades = async ()=>{
         const student = await new Students().getOne(userid)
-        const {first_name,last_name,class_assigned} = student
-        setStudentDetails({first_name,last_name,class_assigned})
-
+        const {first_name,last_name,class_assigned,gender} = student
+        const students_ranking = await getAllStudentsRanked({selected_class:class_assigned,session,selected_term})
+        const position =  students_ranking.findIndex(val=>val.id==userid) +1
+        setStudentDetails({first_name,last_name,class_assigned,position})
         const results = await new Results().findRecord({field:'user_id_string',
         value:`${userid}-${session}-${selected_term}`,
         comparator:'==', 
@@ -85,7 +95,7 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
     return(
         <>
         <Box>
-            <Table>
+            <Table overflowX={'auto'} fontSize={['14px','14px','md','md']}>
                 <Thead>
                     <Tr>
                         <Th>
@@ -141,41 +151,78 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
                     }
                 </Tbody>
             </Table>
-
-            <Table mt={'50px'} maxW="500px" variant={'striped'} borderWidth={'0.5px'}>
-                    <Tr>
-                        <Td>
+            {
+                (student_details.first_name!='')?
+                <Grid fontSize={['14px','14px','md','md']} templateColumns={["repeat(1, 1fr)","repeat(2, 1fr)","repeat(2, 1fr)"]} mt={'50px'} maxW="500px"  borderWidth={'0.5px'}>
+                    <HStack p="3">
+                        <Text>
                             Name:
-                        </Td>
-                        <Td>
+                        </Text>
+                        <Text>
                             {student_details.first_name} {student_details.last_name}
-                        </Td>
-                    </Tr>
-                    <Tr>
-                        <Td>
+                        </Text>
+                    </HStack>
+                    <HStack p="3">
+                        <Text>
                             Class:
-                        </Td>
-                        <Td>
+                        </Text>
+                        <Text>
                             {student_details.class_assigned} 
-                        </Td>
-                    </Tr>
-                    <Tr>
-                        <Td>
+                        </Text>
+                    </HStack>
+                    <HStack p="3">
+                        <Text>
+                            Class:
+                        </Text>
+                        <Text>
+                            {student_details.class_assigned} 
+                        </Text>
+                    </HStack>
+                    <HStack p="3">
+                        <Text>
+                            Position:
+                        </Text>
+                        <Text>
+                            {student_details.position} 
+                        </Text>
+                    </HStack>
+                    <HStack p="3">
+                        <Text>
                             Session:
-                        </Td>
-                        <Td>
+                        </Text>
+                        <Text>
                             {session} 
-                        </Td>
-                    </Tr>
-                    <Tr>
-                        <Td>
+                        </Text>
+                    </HStack>
+                    <HStack p="3">
+                        <Text>
                             Term:
-                        </Td>
-                        <Td>
+                        </Text>
+                        <Text>
                             {selected_term} 
-                        </Td>
-                    </Tr>
-            </Table>
+                        </Text>
+                    </HStack>
+            </Grid>:<></>
+
+            }
+            <VStack mt="10px" alignItems={'center'} maxW={'500px'}>
+            <Stack w="80%">
+               <Text fontWeight={'bold'}>Teachers Remarks</Text> 
+                {
+                    edit?<Textarea  value={teacher_remarks} onChange={(e)=>setTeachersRemarks(e.currentTarget.value)} placeholder="Teachers Remarks"/>:
+                    <>   
+                    <Text>
+                    {teacher_remarks}
+                    </Text>  
+                    </>
+                }
+                
+            </Stack>
+            <HStack>
+            <Button mt="10px" colorScheme="blue" onClick={toggleEdit} >{edit?'Save':'Edit'} Teachers Remark</Button>
+            </HStack>
+            </VStack>
+            
         </Box>
         </>
     )
