@@ -11,8 +11,8 @@ const ChooseUserMenu = ()=>{
                 <HStack borderWidth={'2px'} borderRadius={'10px'} p="4" spacing={5}>
                     <Box className="pi pi-user" {...iconDivStyle}/>
                     <Stack>
-                        <Text fontSize={'2xl'}>Create Student Account</Text>
-                        <Text>Register as a student</Text>
+                        <Text fontSize={'2xl'}>Create Parent Account</Text>
+                        <Text>Register as a parent</Text>
                         <Link href={'/sign-up?type=student'}>
                             <Button>Create Account</Button>
                         </Link>

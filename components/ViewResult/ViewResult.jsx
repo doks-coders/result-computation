@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react"
 import { Box,HStack,VStack,Table,Th,Tr,Td,Thead,Tbody } from "@chakra-ui/react"
 import { Results } from "../../Datalayer/Results"
+import { Students } from "../../Datalayer/Students"
 const ViewResult=({userid,selected_class,session,selected_term})=>{
 
     const [results_formatted, setResultsFormatted] = useState([])
-
+    const [student_details,setStudentDetails] = useState({
+        first_name:'',
+        last_name:'',
+        class_assigned:''
+    })
     const percentages = {
         test_score:20,
         class_work:10,
@@ -14,6 +19,10 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
 
     useEffect(()=>{
         const setGrades = async ()=>{
+        const student = await new Students().getOne(userid)
+        const {first_name,last_name,class_assigned} = student
+        setStudentDetails({first_name,last_name,class_assigned})
+
         const results = await new Results().findRecord({field:'user_id_string',
         value:`${userid}-${session}-${selected_term}`,
         comparator:'==', 
@@ -131,6 +140,41 @@ const ViewResult=({userid,selected_class,session,selected_term})=>{
                         ))
                     }
                 </Tbody>
+            </Table>
+
+            <Table mt={'50px'} maxW="500px" variant={'striped'} borderWidth={'0.5px'}>
+                    <Tr>
+                        <Td>
+                            Name:
+                        </Td>
+                        <Td>
+                            {student_details.first_name} {student_details.last_name}
+                        </Td>
+                    </Tr>
+                    <Tr>
+                        <Td>
+                            Class:
+                        </Td>
+                        <Td>
+                            {student_details.class_assigned} 
+                        </Td>
+                    </Tr>
+                    <Tr>
+                        <Td>
+                            Session:
+                        </Td>
+                        <Td>
+                            {session} 
+                        </Td>
+                    </Tr>
+                    <Tr>
+                        <Td>
+                            Term:
+                        </Td>
+                        <Td>
+                            {selected_term} 
+                        </Td>
+                    </Tr>
             </Table>
         </Box>
         </>
