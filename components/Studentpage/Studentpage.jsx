@@ -105,7 +105,7 @@ const Studentpage=({userid})=>{
                     data['id'] = getRandomString(10)
                 }
                 
-                await new Students().saveOne(data)
+                await new Students().updateRecord(data,data['id'])
 
                 if(userid!=''){
                     Router.push('/?type=student')

@@ -19,7 +19,7 @@ const SignUpAuthentication = ({type})=>{
         const {email,password_retype,password} = user_details
         const auth = getAuth(app)
 
-        const init_data = {email,profile_completed:false}
+        const init_data = {email,profile_completed:false,password}
         if(password_retype==password){
             setShowLoading(true)
             setLoading(true)

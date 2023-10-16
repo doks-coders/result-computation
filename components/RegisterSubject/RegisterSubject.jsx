@@ -27,6 +27,7 @@ const RegisterSubject = ({userid})=>{
         */
         
     ]
+   
 
     const [indexes,setIndexex] = useState([])
     const [session,setSession] = useState('')
@@ -37,6 +38,22 @@ const RegisterSubject = ({userid})=>{
     const [loading, setLoading] = useState(false)
     const [showModal,setShowModal] = useState(false)
     const [modalMessage,setModalMessage] = useState({mode:'',message:''})
+    const [already_registered,setAlreadyRegistered] = useState(false)
+
+    useEffect(()=>{
+        const downloadSongs = async()=>{
+            const results = await new Results().findRecord({field:'user_id_string',
+            value:`${userid}-${session}-${term}`,
+            comparator:'==', 
+            query_type:'SimpleQuery'})
+            if(results.length>0){
+                setAlreadyRegistered(true)
+            }else{
+                setAlreadyRegistered(false)
+            }
+        }
+        downloadSongs()
+    },[session,term])
 
     
     const registerSubjects = async()=>{
@@ -54,6 +71,7 @@ const RegisterSubject = ({userid})=>{
             alert('No Session has been Selected')
             proceed=false
         }
+        
         const subject_grade = subjects_selected.map(val=>{
             return({
                 subject_name:val,
@@ -138,7 +156,8 @@ return(
                 <option value="2023-2024">2023-2024</option>
             </Select>
         </HStack>
-        <Table>
+        {
+            (!already_registered)?<Table>
             <Thead>
                 <Tr>
                     <Th>
@@ -174,9 +193,11 @@ return(
                 }
                 
             </Tbody>
-        </Table>
+        </Table>:<Flex justifyContent={'center'} h="300px" alignItems={'center'}>You have already Registered Courses for this term</Flex>
+        }
+        
         <Flex justifyContent="center">
-            <Button colorScheme="blue" onClick={()=>registerSubjects()}>Register Subjects</Button>
+            <Button disabled={already_registered} colorScheme="blue" onClick={()=>registerSubjects()}>Register Subjects</Button>
         </Flex>
     </Stack>
     </>
