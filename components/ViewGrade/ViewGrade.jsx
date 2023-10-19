@@ -39,8 +39,12 @@ const ViewGrade=()=>{
            //Clean null values
            students_in_class = students_in_class.filter(val=>val!=undefined)
            if(students_in_class.length){
-
-            students_in_class
+            students_in_class.sort((a, b) => {
+                const numA = parseInt(a.last_measured_score);
+                const numB = parseInt(b.last_measured_score);
+                return numB-numA;
+              });
+              
             setRankedStudents(students_in_class)
             setLoading(false)
            }else{
